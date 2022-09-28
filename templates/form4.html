@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></head>
+    <body>
+        <div class="container">
+            <h1>Post for UXlivinglab</h1>
+
+            <button><a href='https://100042.pythonanywhere.com/final' alt='Broken Link'>Home page</a></button><br></br>
+            <input type="button" value="Go back!" onclick="history.back()"><br></br>
+
+            <p>The mail is :{{email}} </p>
+            <p>The brand is :{{brand}}</p>
+            <p>The channel is : {{channel}}</p>
+            <p>the channel brand  type is : {{channelbrand}}</p>
+            <p>The Topic is : {{Topic}}</p>
+            <p>The channel is : {{Topic_description}}</p>
+            <p>The Content is : {{content}}</p>
+            <p>The record is : {{record}}</p>
+            <p>attherates are  :{{combine_attherate}}</p>
+
+
+            <h2>{{ message }}</h2>
+            <h5>Query:</h5>
+            {% if query_path %}
+            <img src="{{ query_path }}" style="width:60px;height:60px;">
+            {% endif %}
+            <h5>Results of similar images in database and there scores of matching:</h5>
+            {% for score in scores %}
+            <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
+                <img src="{{ score[1] }}" style="width:60px;height:60px;">
+                <figcaption>{{ score[0] }}</figcaption>
+            </figure>
+            {% endfor %}
+        </div>
+    </body>
+</html>
+
+

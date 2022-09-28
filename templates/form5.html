@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Textarea</h2>
+<p>The mail is :{{email}} </p>
+<p>the brand is :{{brand}}</p>
+<p>the channel is : {{channel}}</p>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="hidden" id="email" name="email" value="{{email}}" required><br>
+    <input type="hidden" id="brand" name="brand" value="{{brand}}" required><br>
+    <input type="hidden" id="channel" name="channel" value="{{channel}}" required><br>
+    <p>Topic(Topic from article written by AI)</p>
+    <textarea name="Topic" rows="5" cols="30" required></textarea>
+    <p>Topic_description : Post-Edit,Copy and paste the paragrapgh created by AI ,then add hashtags and mentions.(Limit to 200 characters if the post is for twitter ,Limit to 500 characters for other media)</p>
+    <textarea name="Topic_description" rows="5" cols="30" required></textarea><br></br>
+
+    <p>Upload photo or video related to the above post</p><br></br>
+
+    <input type="file" name="query_img" ><br></br>
+
+
+    <input type="submit" name="camera" value=camera><br></br>
+
+
+
+     <label for="content">Qualitative categorisation of post content:</label><br></br>
+  <select id="content" name="content" >
+    <option value="Valuable-Helpful,Educational">Valuable-Helpful,Educational</option>
+    <option value="Aspirational-Idealised,Attainable vision">Aspirational-Idealised,Attainable vision</option>
+    <option value="Life cycke-Building awarness,Nurturing relationship,Encouraging action">Life cycke-Building awarness,Nurturing relationship,Encouraging action</option>
+    <option value="Unique-proprietary,branded ,Business focussed">Unique-proprietary,branded ,Business focussed</option>
+    <option value="Ever green-Timely,Relevant,Useful for years to come">Ever green-Timely,Relevant,Useful for years to come</option>
+  </select><br></br>
+
+  <br>
+  <p>NOTE : click submit button only 1 time . clicking submit button more than 1 time will leads to error response</p><br>
+
+    <p1>It will take about a minute to process images and data .click submit button only one time .</p1></br>
+    <input type="submit">
+    </br>
+    <br></br>
+</form>
+
+</body>
+</html>

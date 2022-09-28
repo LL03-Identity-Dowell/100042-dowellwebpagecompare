@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>UXliving lab</h1>
+  <p>   QR Code Generator</p>
+</div>
+
+        <div class="container">
+
+
+
+            <input type="button" value="Go back!" onclick="history.back()"><br></br>
+            <p>your survey link is :</p>
+            <p>https://{{url}}</p><br>
+
+            <p>The QRCODE is </p><br>
+
+
+            <h5>Scan this QR CODE  or click start survey button to start Survey</h5><br></br>
+
+            <img src="{{ query_path }}" style="width:60px;height:60px;"><br></br>
+
+            <a href ="https://{{url}}">Start Survey</a>
+
+        </div>
+    </body>
+</html>
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<h1>Post for UXlivinglab</h1>
+<p>The mail is :{{email}} </p>
+<p>the brand is :{{brand}}</p>
+<p>the channel is : {{channel}}</p>
+<p>the channel brand type is :{{channelbrand}}</p>
+
+<p>the Topicoo is : {{Topico}}</p>
+<h6>{{db_message}}</h6>
+<form method="POST" enctype="multipart/form-data">
+    <button><a href='https://100042.pythonanywhere.com/final' alt='Broken Link'>Home page</a></button>
+    <input type="button" value="Go back!" onclick="history.back()">
+    <input type="hidden" id="email" name="email" value="{{email}}" required><br>
+    <input type="hidden" id="brand" name="brand" value="{{brand}}" required><br>
+    <input type="hidden" id="channel" name="channel" value="{{channel}}" required><br>
+    <input type="hidden" id="channelbrand" name="channelbrand" value="{{channelbrand}}" required><br>
+    <input type="hidden" id="Topico" name="Topico" value="{{Topico}}" required><br>
+    <p>Topic( article written by AI) Select  one of the article from given Topic<BR><br></br>
+        <input type="radio" name="selected_article" value="{{article[0]}}">{{article[0]}}<BR>
+            <input type="radio" name="selected_article" value="{{article[1]}}">{{article[1]}}<BR>
+                <input type="radio" name="selected_article" value="{{article[2]}}">{{article[2]}}<BR>
+                    <input type="radio" name="selected_article" value="{{article[3]}}">{{article[3]}}<BR>
+                        <input type="radio" name="selected_article" value="{{article[4]}}">{{article[4]}}<BR>
+    </p>
+
+
+    <br>
+
+    <input type="reset" value="Clear form"></br>
+
+<br>
+
+    <input type="submit" name="contentform" value="Next->>">
+
+    </br>
+    <br></br>
+</form>
+
+</body>
+</html>

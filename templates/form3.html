@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+
+  <title>Post for UXlivinglab</title>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      .ui-autocomplete-row
+      {
+        padding:8px;
+        background-color: #f4f4f4;
+        border-bottom:1px solid #ccc;
+        font-weight:bold;
+      }
+      .ui-autocomplete-row:hover
+      {
+        background-color: #ddd;
+      }
+    </style>
+    <script>
+		$(function() {
+			var availableTags = ["jQuery.com", "jQueryUI.com", "jQueryMobile.com", "jQueryScript.net", "jQuery", "Free jQuery Plugins"];
+			var minWordLength = 1;
+			function split(val) {
+				return val.split(' ');
+			}
+
+			function extractLast(term) {
+				return split(term).pop();
+			}
+			$.ajax({
+                url: '{{ url_for("autocomplete") }}'
+                }).done(function (data){
+			$("#tags")
+			// don't navigate away from the field on tab when selecting an item
+			.bind("keydown", function(event) {
+				if (event.keyCode === $.ui.keyCode.TAB && $(this).data("ui-autocomplete").menu.active) {
+					event.preventDefault();
+				}
+			}).autocomplete({
+				minLength: minWordLength,
+				source: function(request, response) {
+					// delegate back to autocomplete, but extract the last term
+					var term = extractLast(request.term);
+					if(term.length >= minWordLength){
+						response($.ui.autocomplete.filter( data, term ));
+					}
+				},
+				focus: function() {
+					// prevent value inserted on focus
+					return false;
+				},
+				select: function(event, ui) {
+					var terms = split(this.value);
+					// remove the current input
+					terms.pop();
+					// add the selected item
+					terms.push(ui.item.value);
+					// add placeholder to get the comma-and-space at the end
+					terms.push("");
+					this.value = terms.join(" ");
+					return false;
+				}
+
+		   	});
+		});
+	});
+
+	  $(document).ready(function(){
+
+    $('#search_data').autocomplete({
+      source: "_image_autocomplete",
+      minLength: 1,
+      select: function(event, ui)
+      {
+        $('#search_data').val(ui.item.value);
+        $('#imagelink').val(ui.item.imagelink);
+
+      }
+    }).data('ui-autocomplete')._renderItem = function(ul, item){
+      return $("<li class='ui-autocomplete-row'></li>")
+        .data("item.autocomplete", item)
+        .append(item.label)
+        .appendTo(ul);
+    };
+
+  });
+    </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+ </head>
+<body>
+
+
+<p>The mail is :{{email}} </p>
+<p>the brand is :{{brand}}</p>
+<p>the channel is : {{channel}}</p>
+<p>channel brand type is : {{channelbrand}} </p>
+<h3>{{execptn}}</h3>
+
+<p>your selected  Topico  is : {{Topico}} </p>
+<p>your selected Content is : {{selected_article}} </p><br></br>
+<p>NOTE: you can edit Topic and Content in below text box</p>
+
+
+<form method="POST" enctype="multipart/form-data" autocomplete="on">
+    <button><a href='https://100042.pythonanywhere.com/final' alt='Broken Link'>Home page</a></button>
+    <input type="button" value="Go back!" onclick="history.back()">
+    <input type="hidden" id="email" name="email" value="{{email}}" required><br>
+    <input type="hidden" id="brand" name="brand" value="{{brand}}" required><br>
+    <input type="hidden" id="channel" name="channel" value="{{channel}}" required><br>
+    <input type="hidden" id="channelbrand" name="channelbrand" value="{{channelbrand}}" required><br>
+    <input type="hidden" id="Topico" name="Topico" value="{{Topico}}" required><br>
+    <input type="hidden" id="selected_article" name="selected_article" value="{{selected_article}}" required><br>
+    <input type="hidden" name="contentform" value="Next->>">
+    <p>Topic(Topic from article written by AI)</p>
+    <textarea  name="Topic" rows="5" cols="30" required>{{Topico}}</textarea>
+    <div class="form-group">
+    <label>Topic_description : Post-Edit,Copy and paste the paragrapgh created by AI ,then add hashtags and mentions.(Limit to 200 characters if the post is for twitter ,Limit to 500 characters for other media)</label>
+    <textarea id="tags" name="Topic_description" rows="10" cols="60"  required>{{selected_article}}</textarea><br></br>
+    </div>
+
+       <div class="form-group">
+        <label>Group one tags:</label>
+        <p1>select atleast one tag from group1 from the list below</p1>
+        <p2>'#livinglab','#innovation','#userexperience','#storytelling','#consumerbehaviour','#behavioraleconomics','#ux','#consumerinsights','#statics'</p2>
+        <input type="text" name="group1" id="group1" class="form-control" required/>
+       </div>
+
+        <div class="form-group">
+        <label>Group one tags:</label>
+        <p1>select atleast one tag from group2 from the list below</p1>
+        <p2>'#truemoments-awareness brand','#seeuser-awareness brand','#statricks-knowledge brand','#dowellcomprehend-knowledge brand','#uxlivinglab-Product brand','#unpackandwin-Product brand','#dowellresearch-Corporate brand','#openinnovationacademy-non profit brand'</p2>
+        <input type="text" name="group2" id="group2" class="form-control" required/>
+       </div>
+
+
+       <div class="form-group">
+        <label>Group one tags:</label>
+        <p1>select atleast one tag from group3 from the list below</p1>
+        <p2>'#goodmorning','#thankyou','#internship','#genz','#sales','#strategy','#business','#digitaltwin','#germany','#singapore','#london','#usa','#sweden'</p2>
+        <input type="text" name="group3" id="group3" class="form-control" required/>
+       </div>
+
+
+       <div class="form-group">
+        <label>Group one tags:</label>
+        <p1>select atleast one tag from group4 from the list below</p1>
+        <p2>'#google','#amazon','#microsoft','#apple','#facebook'</p2>
+        <input type="text" name="group4" id="group4" class="form-control" required />
+       </div>
+
+
+       <div class="form-group">
+        <label>Group one tags:</label>
+        <p1>select atleast one tag from group5 from the list below</p1>
+        <p2>Twitter-5 to 8 hashtags, Linkdin-10-12 Hashtags ,Youtube-10 Hashtags Facebook-5-8 Hashtags ,Instagram -25-3- Hashtags</p2>
+        <input type="text" name="group5" id="group5" class="form-control" required/>
+       </div>
+       <br>
+          <p1>you can choose only one option in 1.Upload image  2.select image through hashtag 3.select camera </p1>
+</br>
+        <div class="form-group">
+        <label>Upload photo or video related to the above post</label>
+
+        <input type="file" name="query_img" >
+       </div>
+
+               <div class="col-md-6">
+                   <label>you can choose only one option in 1.Upload image  2.select image through hashtag 3.select camera </label>
+          <input type="text" id="search_data" placeholder="Enter any hashtag eg. rain, flower etc..." autocomplete="off" class="form-control input-lg" />
+
+        </div>
+        <!-- Hidden input for user ID -->
+        <input type="hidden" id="imagelink" name="imagelink" value=""/>
+        <div class="col-md-3">
+
+        </div><br></br>
+          <label>you can choose only one option in 1.Upload image  2.select image through hashtag 3.select camera </label><br>
+
+    <input type="submit" name="camera" value=camera><br></br>
+    <br>
+
+
+     <label for="content">Qualitative categorisation of post content:</label>
+  <select id="content" name="content" >
+    <option value="Valuable-Helpful,Educational">Valuable-Helpful,Educational</option>
+    <option value="Aspirational-Idealised,Attainable vision">Aspirational-Idealised,Attainable vision</option>
+    <option value="Life cycke-Building awarness,Nurturing relationship,Encouraging action">Life cycke-Building awarness,Nurturing relationship,Encouraging action</option>
+    <option value="Unique-proprietary,branded ,Business focussed">Unique-proprietary,branded ,Business focussed</option>
+    <option value="Ever green-Timely,Relevant,Useful for years to come">Ever green-Timely,Relevant,Useful for years to come</option>
+  </select><br></br>
+
+    <input type="reset" value="Clear form"></br>
+
+<br>
+  <p>NOTE : click submit button only 1 time . clicking submit button more than 1 time will leads to error response</p><br>
+
+    <p1>It will take about a minute to process images and data .click submit button only one time .</p1></br>
+
+    <input type="submit">
+    </br>
+    <br></br>
+</form>
+
+
+</body>
+
+<script>
+$(document).ready(function(){
+
+ $('#group1').tokenfield({
+  autocomplete:{
+   source: ['#livinglab','#innovation','#userexperience','#storytelling','#consumerbehaviour','#behavioraleconomics','#ux','#consumerinsights','#statics'],
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ });
+
+  $('#group2').tokenfield({
+  autocomplete:{
+   source: ['#truemoments-awareness brand','#seeuser-awareness brand','#statricks-knowledge brand','#dowellcomprehend-knowledge brand','#uxlivinglab-Product brand','#unpackandwin-Product brand','#dowellresearch-Corporate brand','#openinnovationacademy-non profit brand'],
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ });
+  $('#group3').tokenfield({
+  autocomplete:{
+   source: ['#goodmorning','#thankyou','#internship','#genz','#sales','#strategy','#business','#digitaltwin','#germany','#singapore','#london','#usa','#sweden'],
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ });
+  $('#group4').tokenfield({
+  autocomplete:{
+   source: ['#google','#amazon','#microsoft','#apple','#facebook'],
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ });
+  $('#group5').tokenfield({
+  autocomplete:{
+   source: ['#Twitter','#Linkdin','#Youtube','#Facebook','#Instagram'],
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ });
+
+});
+</script>
+
+</html>
